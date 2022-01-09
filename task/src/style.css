@@ -1,15 +1,16 @@
 .main {
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    flex-direction: row;
+    /*align-items: center;*/
+    justify-content: center;
 }
 .image-preview {
     display: flex;
     justify-content: center;
-    min-width: 800px;
+    min-width: 70vw;
     min-height: auto;
-    max-width: 800px;
-    max-height: 600px;
+    max-width: 70vw;
+    max-height: 90vh;
     border: 2px solid antiquewhite;
 }
 #canvas {
@@ -17,12 +18,17 @@
     height: auto;
 }
 .interface {
-    box-sizing: border-box;
     display: flex;
-    justify-content: space-around;
-    margin-top: 5px;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
     padding: 5px;
     background-color: antiquewhite;
-    min-width: 800px;
+}
+.interface-element {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
 }
 

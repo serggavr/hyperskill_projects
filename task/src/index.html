@@ -13,11 +13,24 @@
             </canvas>
         </div>
         <div class="interface">
-            <input type="file" id="file-input" accept = "image/*">
-            <input type="range" name="Brightness" id="brightness" min="-255" max="255" step="1" >
-            <input type="range" name="Contrast" id="contrast" min="-128" max="128" step="1" >
-            <input type="range" name="Transparent" id="transparent" min="0" max="1" value="1" step="0.1">
-            <button id="save-button">save image</button>
+            <div class="interface-element">
+                <input type="file" id="file-input" accept = "image/*">
+            </div>
+            <div class="interface-element">
+                <label for="brightness">Brightness</label>
+                <input type="range" name="Brightness" id="brightness" min="-255" max="255" step="1" >
+            </div>
+            <div class="interface-element">
+                <label for="contrast">Contrast</label>
+                <input type="range" name="Contrast" id="contrast" min="-128" max="128" step="1" >
+            </div>
+            <div class="interface-element">
+                <label for="transparent">Transparent</label>
+                <input type="range" name="Transparent" id="transparent" min="0" max="1" value="1" step="0.1">
+            </div>
+            <div class="interface-element">
+                <button id="save-button">save image</button>
+            </div>
         </div>
         <script src="app.js"></script>
     </main>

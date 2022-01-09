@@ -5,9 +5,12 @@ let contrastInput = document.getElementById('contrast');
 let transparentInput = document.getElementById('transparent');
 let saveButton = document.getElementById('save-button');
 let ctx = canvas.getContext('2d');
+let image = null;
 
-// const pixels = imageData.data;
-// let pixels = ctx.getImageData(0, 0, canvas.width, canvas.height).data;
+brightnessInput.addEventListener('change', changeImage);
+contrastInput.addEventListener('change', changeImage);
+transparentInput.addEventListener('change', changeImage);
+
 
 imageInput.addEventListener('change', function(img) {
     if (img.target.files) {
@@ -15,7 +18,7 @@ imageInput.addEventListener('change', function(img) {
         let imgReader = new FileReader();
         imgReader.readAsDataURL(file);
         imgReader.onloadend = function(e) {
-            let image = new Image();
+            image = new Image();
             image.src = e.target.result;
             image.onload = function () {
                 canvas.height = image.height;
@@ -26,47 +29,50 @@ imageInput.addEventListener('change', function(img) {
     }
 })
 
-// brightnessInput.addEventListener('change', function () {
-//     for(let i = 0; i < imageData.data.length - 1; i++) {
-//         if (i % 4 !== 0) {
-//             imageData.data[i] = imageData.data + brightnessInput.value;
-//             if (imageData.data[i] > 255) {
-//                 imageData.data[i] = 255;
-//             }
-//             if (imageData.data[i] < 0) {
-//                 imageData.data[i] = 0;
-//             }
-//             // console.log(imageData.data[i]);
-//         }
-//     }
-//     ctx.putImageData(imageData, 0, 0);
-// })
-const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-brightnessInput.addEventListener('change', function () {
-    let imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-    console.log(imageData.data)
-    for(let i = 0; i < imageData.data.length - 1; i++) {
-        if (i === 0 || i % 3 !== 0) {
-            imageData.data[i] = imageData.data[i] + brightnessInput.value;
-            if (imageData.data[i] > 255) {
-                imageData.data[i] = 255;
-            }
-            if (imageData.data[i] < 0) {
-                imageData.data[i] = 0;
-            }
-            // console.log(imageData.data[i]);
-        }
+function truncate(value) {
+    if (value > 255) return 255;
+    if (value < 0 ) return 0;
+    return value;
+}
+
+function changeImage() {
+    ctx.drawImage(image,0,0);
+    const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+    const factor = 259*(255+Number(contrastInput.value))/(255*(259-Number(contrastInput.value)))
+    let pixels = imageData.data;
+    for(let i = 0; i < pixels.length - 1; i += 4) {
+        pixels[i] = truncate(factor * (pixels[i] - 128) + 128 + Number(brightnessInput.value))
+        pixels[i+1] = truncate(factor * (pixels[i+1] - 128) + 128 + Number(brightnessInput.value))
+        pixels[i+2] = truncate(factor * (pixels[i+2] - 128) + 128 + Number(brightnessInput.value))
+        pixels[i+3] = pixels[i+3] * Number(transparentInput.value);
     }
     ctx.putImageData(imageData, 0, 0);
-    console.log("brightnessInput done")
-})
+    console.log("changeImage done")
+}
+
+// function changeImage() {
+//     ctx.drawImage(image,0,0);
+//     const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+//     const factor = 259*(255+128)/(255*(259-128))
+//     let pixels = imageData.data;
+//     for(let i = 0; i < pixels.length - 1; i += 4) {
+//         pixels[i] = truncate(factor * (pixels[i] - 128) + 128 + 92)
+//         pixels[i+1] = truncate(factor * (pixels[i+1] - 128) + 128 + 92)
+//         pixels[i+2] = truncate(factor * (pixels[i+2] - 128) + 128 + 92)
+//         pixels[i+3] = pixels[i+3] * 0.8;
+//     }
+//     ctx.putImageData(imageData, 0, 0);
+//     console.log("changeImage done")
+//     console.log(imageData)
+// }
 
 saveButton.addEventListener('click', function () {
-    console.log(pixels)
-    console.log(brightnessInput.value)
-    console.log("imageData.data", imageData.data)
-    console.log("imageData", imageData)
-    console.log(ctx.getImageData(0, 0, canvas.width, canvas.height).data)
-    console.log(ctx.getImageData(0, 0, canvas.width, canvas.height))
-    console.log({pixels})
+    let downloadImage = canvas.toDataURL('image/png', 1);
+    let element = document.createElement('a');
+    element.download = 'result.png';
+    element.href = downloadImage;
+    element.click();
+    document.body.removeChild(element);
 })
+
+// saveButton.addEventListener('click', changeImage)
