@@ -1,0 +1,100 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+:root {
+    --quiz-color: #edf6f9;
+    --quiz-cards-color: #e29578;
+    --quiz-card-front-text-color: #006d77;
+    --quiz-card-front-color: #edf6f9;
+    --quiz-card-back-text-color: #006d77;
+    --quiz-card-back-color: #ffddd2;
+    --title-font-size: 1em;
+    --card-font-size: 18px;
+}
+
+
+body {
+    margin: 0 auto;
+    max-width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-image: url("img/worldmap.jpg");
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    font-family: 'Roboto', sans-serif;
+}
+
+.quiz {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1em;
+    border-radius: 1em;
+    background-color: var(--quiz-color);
+}
+
+.quiz-title {
+    width: 100%;
+    margin: 0 0 .5em;
+    border-radius: 1em;
+    color: var(--quiz-card-back-text-color);
+    background-color: var(--quiz-card-back-color);
+    text-align: center;
+    font-size: var(--title-font-size);
+}
+
+.quiz-cards {
+    justify-content: center;
+    display: inline-grid;
+    grid-template-columns: 10vw 10vw 10vw 10vw;
+    grid-template-rows: 10vw 10vw 10vw ;
+    grid-gap: 1em;
+    padding: 1em;
+    border-radius: 1em;
+    background-color: var(--quiz-cards-color);
+    grid-template-areas: none;
+}
+
+.quiz-card {
+    position: relative;
+    transition: all 2s ease;
+    transform-style: preserve-3d;
+    width: 100%;
+    height: 100%;
+}
+
+.quiz-container {
+    position: relative;
+    transition: all 2s ease;
+    transform-style: preserve-3d;
+}
+
+.quiz-container:hover {
+    transform: rotateY(180deg);
+}
+
+.quiz-card_front, .quiz-card_back {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    border-radius: 1em;
+}
+
+.quiz-card_front {
+    background-color: var(--quiz-card-front-color);
+    color: var(--quiz-card-front-text-color);
+    z-index: 2;
+    backface-visibility: hidden;
+}
+.quiz-card_back {
+    background-color: var(--quiz-card-back-color);
+    color: var(--quiz-card-back-text-color);
+    z-index: 1;
+    transform: rotateY(180deg);
+}
