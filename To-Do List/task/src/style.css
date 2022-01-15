@@ -1,0 +1,15 @@
+
+
+
+/*.checkbox + span{*/
+/*    text-decoration: none;*/
+/*}*/
+
+
+/*.checkbox:checked + span{*/
+/*    text-decoration: line-through;*/
+/*}*/
+
+.strikethrough {
+    text-decoration: line-through;
+}
