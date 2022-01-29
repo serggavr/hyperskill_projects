@@ -1,0 +1,146 @@
+body {
+    margin: 0 auto;
+    width: 100vw;
+    height: 100vh;
+    background-color: black;
+}
+.space {
+    position: relative;
+    margin: 0 auto;
+    width: 80vw;
+    height: 100%;
+    background-image: url("img/space.png");
+    background-size: contain;
+    background-position: center;
+
+}
+
+.planet-area {
+    position: absolute;
+    width: 80vw;
+    height: 100%;
+    overflow: hidden;
+}
+
+.planet {
+    position: absolute;
+    height: 50vh;
+    left: -5px;
+    top: 60vh;
+    z-index: 1;
+}
+
+.rocket {
+    position: absolute;
+    height: 15vh;
+    left: 25vh;
+    top: 70vh;
+    transform: rotate(30deg);
+    animation-duration: 10s;
+    animation-name: rocket-start;
+    animation-iteration-count: 1;
+    animation-play-state: paused;
+}
+
+.rocket_start {
+    animation-play-state: running;
+}
+
+@keyframes rocket-start {
+    0% {
+        left: 25vh;
+        top: 70vh;
+        height: 15vh;
+    }
+    100% {
+        left: 100vh;
+        top: -1vh;
+        height: 10vh;
+    }
+}
+
+.control-panel {
+    width: 50vh;
+    position: absolute;
+    box-sizing: border-box;
+    padding: 1.5vh;
+    right: 3vh;
+    top: 40vh;
+    background: repeating-linear-gradient(-45deg, yellow, yellow 13px, black 0, black 30px);
+    border-radius: 1vh 1vh 1vh 11vh;
+}
+.control-panel__inner{
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    row-gap: 1vh;
+    background: linear-gradient(270deg, rgba(2,0,36,1) 0%, rgba(39,39,179,1) 53%);
+    border-radius: 1vh 1vh 1vh 11vh;
+    /*border-left: 1px solid darkblue;*/
+}
+
+.control-panel-password {
+    height: 4vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    column-gap: 1vh;
+}
+
+.password-input {
+    /*flex-grow: 1;*/
+    max-width: 50%;
+    border-radius: 1vh;
+    border: 2px solid yellow;
+    color: green;
+}
+
+.password-button {
+    background-color: yellow;
+}
+
+.control-panel-button {
+    width: 10vh;
+    border-radius: 1vh;
+    border: 1px solid darkblue;
+}
+
+.check-buttons {
+    height: 6vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: end;
+    border-radius: 1vh;
+    background: linear-gradient(90deg, rgba(159,225,229,1) 0%, rgba(255,255,255,1) 50%, rgba(159,225,229,1) 100%);
+    border: 1px solid darkblue;
+}
+
+.check-buttons-checkbox {
+    width: 3vh;
+}
+
+.levers {
+    height: 16vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    border-radius: 1vh;
+    background: linear-gradient(90deg, rgba(159,225,229,1) 0%, rgba(255,255,255,1) 50%, rgba(159,225,229,1) 100%);
+    border: 1px solid darkblue;
+
+}
+.levers-range {
+    -webkit-appearance: slider-vertical;
+    width: 3vh;
+    height: 12vh;
+}
+
+.launch-button {
+    height: 4vh;
+    margin-top: 3vh;
+    align-self: center;
+    background: linear-gradient(90deg, rgba(255,160,160,1) 0%, rgba(214,39,39,1) 48%, rgba(255,160,160,1) 100%);
+    border: 1px solid rgba(214,39,39,1);
+}
